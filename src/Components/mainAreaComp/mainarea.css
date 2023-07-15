@@ -1,38 +1,79 @@
 .main-area {
-    display: flex;
-    
+  display: flex;
+  justify-content: space-between;
 }
 
 .sidebar-left {
-    background-color: red;
-    width: 20%;
+  background-color: #161819;
+  width: 20%;
+  height: 100vh;
 }
 
 .sidebar-left p {
-    color: wheat;
+  color: wheat;
 }
 
 .right-area {
-    background-color: blueviolet;
-    width: 80%;
+  background-color: blueviolet;
+  width: 85%;
+  height: 100vh;
+}
+
+.add-sec {
+  justify-content: space-between;
+  border-bottom: 1px rgb(61, 57, 57) solid;
+}
+
+.top-add-sec {
+
+}
+
+.add-sec button {
+  margin: 15px;
+  border: none;
+  font-size: 1.3rem;
+  color: white;
+}
+
+.add-sec p {
+  margin: 15px;
+  font-size: 1.7rem;
+  text-align: center;
+  margin: 20px;
+  margin-bottom: 40px;
 }
 
 
+.input-box {
+  text-align: center;
+}
+
+.textbox-title {
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  font-size: 25px;
+  color: white;
+  letter-spacing: 1px;
+  outline: none;
+  background-color: transparent;
+}
+
 .btn-add {
-    display: flex;
-    justify-content: space-between;
+    margin: 10px;
+    text-align: center;
 }
 
 .btn-add button {
-    margin: 15px;
-    border: none;
-    font-size: 1.3rem;
-    background-color: green;
-    
-    color: white;
+    background-color: rgb(200, 195, 195);
+    color: black;
+    font-size: 1.5rem;
+    padding: 5% 20%;
+    border-radius: 25px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.btn-add p {
-    margin: 15px;
-    font-size: 1.3rem;
+.btn-add button:hover {
+    cursor: pointer;
+    background-color: #545758;
 }
+

@@ -7,6 +7,8 @@ import "./mainarea.css";
 
 const MainArea = () => {
   const [title, setTitle] = useState("");
+  const [components, setComponents] = useState([]);
+  const [selectedComponentId, setSelectedComponentId] = useState(null);
 
   const handleAddComponent = () => {
     const newComponent = {
@@ -18,10 +20,6 @@ const MainArea = () => {
     setComponents([...components, newComponent]);
     setTitle("");
   };
-
-  const [components, setComponents] = useState([]);
-  
-  const [selectedComponentId, setSelectedComponentId] = useState(null);
 
   const handleTextChange = (e, id) => {
     const updatedComponents = components.map((component) =>
@@ -37,19 +35,37 @@ const MainArea = () => {
   return (
     <div className="main-area">
       <div className="sidebar-left">
-        <div className="btn-add">
-          <p>New</p>
-          <input type="text" onChange={(e) => setTitle(e.target.value)} />
-          <button onClick={handleAddComponent}>Add</button>
+        <div className="top-add-sec">
+          <div className="add-sec">
+            <div>
+              <p>My Scripts</p>
+            </div>
+            <div className="input-box">
+              <input
+                class="textbox-title"
+                type="text"
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Title"
+              />
+              <span class="focus-border-12"></span>
+            </div>
+            <div className="btn-add">
+              <button onClick={handleAddComponent}>Create</button>
+            </div>
+          </div>
         </div>
-        {components.map((component) => (
-          <Sublist
-            key={component.id}
-            listTitle={component.title}
-            id={component.id}
-            handleClick={handleClick}
-          />
-        ))}
+        <div>
+          <div className="sec-bottom-title">
+            {/* <p>MY Scripts</p> */}
+          </div>
+          {components.map((component) => (
+            <Sublist
+              listTitle={component.title}
+              id={component.id}
+              handleClick={handleClick}
+            />
+          ))}
+        </div>
       </div>
 
       <div className="right-area">

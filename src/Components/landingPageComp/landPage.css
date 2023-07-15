@@ -1,8 +1,5 @@
 .landpage {
     background-color: #2B2E4A;
-    
-    /* display: flex; */
-    /* background-image: url('./book1.png'); */
 }
 
 .addNote-btn {
@@ -28,7 +25,4 @@
     margin-top: 50px;
 }
 
-/* .letter {
-    font-size: 10rem;
-} */
 
