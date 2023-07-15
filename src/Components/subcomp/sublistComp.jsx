@@ -2,7 +2,7 @@ import React from "react";
 import "./sublistcard.css";
 
 const Sublist = (props) => {
-  const title = props.sub.title;
+  let title = props.listTitle;
   return (
     <div className="ListCard-div">
       <div className="ListCard">
