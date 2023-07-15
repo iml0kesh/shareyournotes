@@ -2,11 +2,11 @@ import react from "react";
 import "./subcomp.css";
 
 const subCard = (props) => {
-  let Title = props.cardtitle;
+  let Title = props.cardTitle;
   let text = props.text;
   return (
     <div>
-      <div class="col-12">
+      {/* <div class="col-12">
         <input
           class="textbox-12"
           type="text"
@@ -14,6 +14,9 @@ const subCard = (props) => {
           defaultValue={Title}
         />
         <span class="focus-border-12"></span>
+      </div> */}
+      <div>
+        <p>{Title}</p>{" "}
       </div>
       <br></br>
       <div class="col-13">

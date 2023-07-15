@@ -6,29 +6,21 @@ import Sublist from "../subcomp/sublistComp";
 import "./mainarea.css";
 
 const MainArea = () => {
-  const [title, setTitle] = useState();
-  const [text, setText] = useState();
-
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
   const [components, setComponents] = useState([]);
-  const [textComps, setTextComps] = useState([]);
+  const [selectedComponent, setSelectedComponent] = useState(null);
 
   const handleAddComponent = () => {
     const newComponent = {
-      id: components.length - 1,
-      title: title,
-    };
-
-    setComponents([...components, newComponent]);
-    setTitle();
-
-    const newTextComp = {
-      id: textComps.length - 1,
+      id: components.length + 1,
       title: title,
       text: text,
     };
 
-    setTextComps([...textComps, newTextComp]);
-    setText();
+    setComponents([...components, newComponent]);
+    setTitle("");
+    setText("");
   };
 
   return (
@@ -41,18 +33,35 @@ const MainArea = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
+          <input
+            type="text"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
           <button onClick={handleAddComponent}>Add</button>
         </div>
         {components.map((component) => (
-          <Sublist key={component.id} listTitle={component.title} />
+          <Sublist
+            key={component.id}
+            listTitle={component.title}
+            handleClick={() => setSelectedComponent(component)}
+          />
         ))}
       </div>
       <div className="right-area">
-        {textComps.map((text) => (
-          <SubCompContainer cardTitle={text.title} cardText={text.text} />
+        {components.map((component) => (
+          <div key={component.id}>
+            {selectedComponent && selectedComponent.id === component.id && (
+              <SubCompContainer
+                cardTitle={component.title}
+                cardText={component.text}
+              />
+            )}
+          </div>
         ))}
       </div>
     </div>
   );
 };
+
 export default MainArea;
