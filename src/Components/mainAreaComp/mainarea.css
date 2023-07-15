@@ -1,0 +1,38 @@
+.main-area {
+    display: flex;
+    
+}
+
+.sidebar-left {
+    background-color: red;
+    width: 20%;
+}
+
+.sidebar-left p {
+    color: wheat;
+}
+
+.right-area {
+    background-color: blueviolet;
+    width: 80%;
+}
+
+
+.btn-add {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-add button {
+    margin: 15px;
+    border: none;
+    font-size: 1.3rem;
+    background-color: green;
+    
+    color: white;
+}
+
+.btn-add p {
+    margin: 15px;
+    font-size: 1.3rem;
+}
