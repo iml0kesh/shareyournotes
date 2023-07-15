@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 
-const SubCompContainer = ({ cardTitle, cardText }) => {
-  const [text, setText] = useState(cardText);
-
+const SubCompContainer = ({ cardTitle, cardText, handleTextChange }) => {
   return (
     <div>
       <div>
-        <p>{cardTitle}</p>
+        <p>{cardTitle}</p>{" "}
       </div>
       <br />
       <div className="col-13">
@@ -16,8 +14,8 @@ const SubCompContainer = ({ cardTitle, cardText }) => {
           className="textbox-13"
           type="text"
           placeholder="Start Typing Bro...."
-          value={text}
-          onChange={(e) => setText(e.target.value)}
+          value={cardText}
+          onChange={handleTextChange}
         />
       </div>
       <div className="btns">

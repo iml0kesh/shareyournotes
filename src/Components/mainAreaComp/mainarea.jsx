@@ -7,20 +7,31 @@ import "./mainarea.css";
 
 const MainArea = () => {
   const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [components, setComponents] = useState([]);
-  const [selectedComponent, setSelectedComponent] = useState(null);
 
   const handleAddComponent = () => {
     const newComponent = {
       id: components.length + 1,
       title: title,
-      text: text,
+      text: "",
     };
 
     setComponents([...components, newComponent]);
     setTitle("");
-    setText("");
+  };
+
+  const [components, setComponents] = useState([]);
+  
+  const [selectedComponentId, setSelectedComponentId] = useState(null);
+
+  const handleTextChange = (e, id) => {
+    const updatedComponents = components.map((component) =>
+      component.id === id ? { ...component, text: e.target.value } : component
+    );
+    setComponents(updatedComponents);
+  };
+
+  const handleClick = (id) => {
+    setSelectedComponentId(id);
   };
 
   return (
@@ -28,33 +39,27 @@ const MainArea = () => {
       <div className="sidebar-left">
         <div className="btn-add">
           <p>New</p>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <input
-            type="text"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
+          <input type="text" onChange={(e) => setTitle(e.target.value)} />
           <button onClick={handleAddComponent}>Add</button>
         </div>
         {components.map((component) => (
           <Sublist
             key={component.id}
             listTitle={component.title}
-            handleClick={() => setSelectedComponent(component)}
+            id={component.id}
+            handleClick={handleClick}
           />
         ))}
       </div>
+
       <div className="right-area">
         {components.map((component) => (
           <div key={component.id}>
-            {selectedComponent && selectedComponent.id === component.id && (
+            {component.id === selectedComponentId && (
               <SubCompContainer
                 cardTitle={component.title}
                 cardText={component.text}
+                handleTextChange={(e) => handleTextChange(e, component.id)}
               />
             )}
           </div>
