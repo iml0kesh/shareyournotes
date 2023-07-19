@@ -7,17 +7,18 @@ import "./mainarea.css";
 
 const MainArea = () => {
   const [title, setTitle] = useState("");
-  const [components, setComponents] = useState([]);
-  const [selectedComponentId, setSelectedComponentId] = useState(null);
+  const [selectedNoteId, setSelectedNoteId] = useState(null);
 
-  const handleAddComponent = () => {
-    const newComponent = {
+  const [components, setComponents] = useState([]);
+
+  const CreateNoteComponent = () => {
+    const newNote = {
       id: components.length + 1,
       title: title,
       text: "",
     };
 
-    setComponents([...components, newComponent]);
+    setComponents([...components, newNote]);
     setTitle("");
   };
 
@@ -28,8 +29,8 @@ const MainArea = () => {
     setComponents(updatedComponents);
   };
 
-  const handleClick = (id) => {
-    setSelectedComponentId(id);
+  const openNote = (id) => {
+    setSelectedNoteId(id);
   };
 
   return (
@@ -47,22 +48,21 @@ const MainArea = () => {
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Title"
               />
-              <span class="focus-border-12"></span>
             </div>
             <div className="btn-add">
-              <button onClick={handleAddComponent}>Create</button>
+              <button onClick={CreateNoteComponent}>Create</button>
             </div>
           </div>
         </div>
         <div>
-          <div className="sec-bottom-title">
-            {/* <p>MY Scripts</p> */}
-          </div>
+          <div className="sec-bottom-title"></div>
+          {/* Rendring all the notes */}
           {components.map((component) => (
             <Sublist
               listTitle={component.title}
               id={component.id}
-              handleClick={handleClick}
+              // This handleClick will render the correspoinding Text area. 
+              handleClick={openNote} 
             />
           ))}
         </div>
@@ -70,8 +70,8 @@ const MainArea = () => {
 
       <div className="right-area">
         {components.map((component) => (
-          <div key={component.id}>
-            {component.id === selectedComponentId && (
+          <div>
+            {component.id === selectedNoteId && (
               <SubCompContainer
                 cardTitle={component.title}
                 cardText={component.text}

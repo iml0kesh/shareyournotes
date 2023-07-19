@@ -39,4 +39,3 @@ const SubCompContainer = ({ cardTitle, cardText, handleTextChange }) => {
 };
 
 export default SubCompContainer;
-
