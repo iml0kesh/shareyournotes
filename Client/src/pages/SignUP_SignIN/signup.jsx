@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-
 import User from "./usercomp";
+// import { response } from "express";
 
 const Signup = () => {
   const [userName, setUserName] = useState("");
@@ -10,13 +10,30 @@ const Signup = () => {
 
   const [users, setUsers] = useState([]);
 
-  const createUser = () => {
+  const createUser = (e) => {
+    e.preventDefault();
     const newUser = {
-      UserName: userName,
-      Userid: userId,
-      UserEmail: userEmail,
-      UserPassword: userPassword,
+      userName: userName,
+      userId: userId,
+      userEmail: userEmail,
+      userPassword: userPassword,
     };
+
+    fetch("/api/signup", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(newUser),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("user saved success: ", data);
+      })
+      .catch((err) => {
+        console.error("Error", err);
+      });
+
     setUsers([...users, newUser]);
     setUserName("");
     setUserId("");
@@ -26,7 +43,7 @@ const Signup = () => {
 
   return (
     <>
-      <form action="/signup">
+      <form onSubmit={createUser} action="/signup">
         <input
           type="text"
           name="user-name"
@@ -51,17 +68,18 @@ const Signup = () => {
           onChange={(e) => setUserPassword(e.target.value)}
           placeholder="Password"
         />
-        <button onClick={createUser}>Create</button>
+        <button type="submit">Create</button>
       </form>
       <div>
-        {users.map((user) => {
+        {users.map((user, index) => (
           <User
-            UserName={user.userName}
-            UserId={user.userId}
-            UserEmail={user.userEmail}
-            UserPassword={user.userPassword}
-          />;
-        })}
+            key={index}
+            userName={user.userName}
+            userId={user.userId}
+            userEmail={user.userEmail}
+            userPassword={user.userPassword}
+          />
+        ))}
       </div>
     </>
   );

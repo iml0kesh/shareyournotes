@@ -1,13 +1,13 @@
 import React from "react";
 
-const UserComp = (props) => {
+const UserComp = ({ userName, userId, userEmail, userPassword }) => {
   return (
-    <>
-      <h1>{props.UserName}</h1>
-      <h2>{props.UserId}</h2>
-      <h3>{props.UserEmail}</h3>
-      <h4>{props.UserPassword}</h4>
-    </>
+    <div>
+      <p>Name: {userName}</p>
+      <p>User ID: {userId}</p>
+      <p>Email: {userEmail}</p>
+      <p>Password: {userPassword}</p>
+    </div>
   );
 };
 

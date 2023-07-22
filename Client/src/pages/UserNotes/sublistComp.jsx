@@ -1,5 +1,4 @@
 import React from "react";
-// import "..";
 
 const Sublist = ({ listTitle, id, handleClick }) => {
   return (
