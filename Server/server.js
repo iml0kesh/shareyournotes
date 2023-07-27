@@ -1,43 +1,24 @@
+require("dotenv").config();
 
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const userModel = require('./models/userModel');
-
+const express = require("express");
 const app = express();
-const PORT = 1937;
+const bodyParser = require("body-parser");
+const db = require("./config/dbconn");
+const authRoutes = require("./routes/auth");
+const noteRoutes = require("./routes/note");
 
-mongoose.connect("mongodb://localhost/demo", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+app.use(express.json());
+app.use(bodyParser.json());
+
+// Database Connection status
+db;
+
+// AUTH ROUTES.
+app.use("/auth", authRoutes);
+
+// NOTE ROUTES
+app.use("/note", noteRoutes);
+
+app.listen(process.env.PORT, () => {
+  console.log(`Server is up and running on port ${process.env.PORT}`);
 });
-
-app.use(bodyParser.json())
-
-
-require("./models/userModel");
-
-app.post("/api/signup", (req, res) => {
-    const { userName, userId, userEmail, userPassword } = req.body;
-    const User = mongoose.model("User", userModel);
-    
-    const newUser = new User({
-        userName,
-        userId,
-        userEmail,
-        userPassword,
-    });
-
-    newUser.save((err, savedUser) => {
-        if (err) {
-            console.log("Error Saving the user: ", err);
-        } else {
-            console.log("USer Saved Success ", savedUser);
-        }
-    })
-
-})
-
-app.listen(PORT, () => {
-    console.log(`Server is up and running on port ${PORT}`);
-})
