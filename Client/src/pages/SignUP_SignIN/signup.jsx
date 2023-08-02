@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import User from "./usercomp";
-// import { response } from "express";
 
 const Signup = () => {
   const [userName, setUserName] = useState("");
