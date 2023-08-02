@@ -16,18 +16,28 @@ app.use(cors());
 // Database Connection status
 db;
 
-app.get("/home", (req, res) => {
-  res.json({
-    name: "Bill",
-    age: 99,
-  });
-});
+// app.get("/home", (req, res) => {
+//   res.json({
+//     name: "Bill",
+//     age: 99,
+//   });
+// });
 
 // AUTH ROUTES.
 app.use("/auth", authRoutes);
 
 // NOTE ROUTES
 app.use("/note", noteRoutes);
+
+app.post("/smaple", (req, res) => {
+  console.log(req.body);
+  res.json(req.body);
+});
+
+// app.get("/smaple", (req, res) => {
+//   console.log(req.body);
+//   res.json({ title: "hello" });
+// });
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is up and running on port ${process.env.PORT}`);
