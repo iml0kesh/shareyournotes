@@ -70,6 +70,7 @@ const RegForm = () => {
         <button type="submit" onClick={handleSubmit}>
           create
         </button>
+        
       </form>
     </div>
   );

@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 
-import Landpage from "./pages/Home/landPage";
+import Landpage from "./pages/Home/index"
 import Register from "./pages/auth_register";
 import Login from "./pages/auth_login/login_Form";
 import UserNotes from "./pages/UserNotes/mainarea";

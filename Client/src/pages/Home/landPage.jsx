@@ -1,8 +1,7 @@
 import React from "react";
-// import "./landPage.css";
 import Header from "../Header/header";
 
-const landpage = () => {
+const Landpage = () => {
   return (
     <div className="landpage">
       <Header />
@@ -12,9 +11,8 @@ const landpage = () => {
           Add Notes
         </button>
       </div>
-      <div className="section2"></div>
     </div>
   );
 };
 
-export default landpage;
+export default Landpage;

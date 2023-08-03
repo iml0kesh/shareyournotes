@@ -1,12 +1,12 @@
 import React from "react";
 
-const MiniNote = (props) => {
-    return (
-        <div>
-            <label>title</label>
-            <p>hello how are i am under water</p>
-        </div>
-    )
-}
+const MiniNote = ({ title, note }) => {
+  return (
+    <div>
+      <label>{title}</label>
+      <p>{note}</p>
+    </div>
+  );
+};
 
 export default MiniNote;
