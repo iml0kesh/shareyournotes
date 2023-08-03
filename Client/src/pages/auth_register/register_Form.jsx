@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Form = () => {
+const RegForm = () => {
   const [name, setName] = useState("");
   const [userId, setUserId] = useState("");
   const [email, setEmail] = useState("");
@@ -22,7 +22,7 @@ const Form = () => {
     setPassword(e.target.value);
   };
 
-  async function postUser(url = "", data = {}) {
+  async function postRegister(url = "", data = {}) {
     const response = await fetch(url, {
       method: "POST",
       mode: "cors",
@@ -39,12 +39,12 @@ const Form = () => {
     if (!name || !userId || !email || !password) {
       alert("Bro give all fields");
     } else {
-      postUser("http://localhost:3001/auth/userregister", {
+      postRegister("http://localhost:3001/auth/userregister", {
         userName: name,
         userId: userId,
         userEmail: email,
         userPassword: password,
-      }).then((data) => { 
+      }).then((data) => {
         console.log(data);
       });
     }
@@ -75,4 +75,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default RegForm;

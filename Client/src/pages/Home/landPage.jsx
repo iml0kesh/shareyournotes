@@ -1,6 +1,6 @@
 import React from "react";
 // import "./landPage.css";
-import Header from "../Header/headerComp";
+import Header from "../Header/header";
 
 const landpage = () => {
   return (
