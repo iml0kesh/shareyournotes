@@ -39,15 +39,27 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
-      <form action="">
-        <label htmlFor="">Email</label>
-        <input type="text" placeholder="email" onChange={handleEmail} />
+    <div className="log-body">
+      <form className="log-form">
+        <h1>BRO Login</h1>
+        <br />
+        <label className="log-form-label">Email</label>
+        <input
+          className="log-input"
+          type="text"
+          placeholder="email"
+          onChange={handleEmail}
+        />
 
-        <label htmlFor="">password</label>
-        <input type="text" placeholder="password" onChange={handlePassword} />
+        <label className="log-form-label">password</label>
+        <input
+          className="log-input"
+          type="text"
+          placeholder="password"
+          onChange={handlePassword}
+        />
 
-        <button onClick={handleChange}> Login </button>
+        <button className="log-submit-btn" onClick={handleChange}> Login </button>
       </form>
     </div>
   );

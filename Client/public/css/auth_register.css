@@ -1,0 +1,52 @@
+.reg-body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.reg-body-head{
+  text-align: center;
+}
+
+.reg-form {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+  width: 300px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.reg-form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.reg-input {
+  width: 100%;
+  padding: 8px 0px;
+  padding-left: 3px;
+  margin-bottom: 15px;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+}
+
+.reg-submit-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.reg-submit-btn:hover {
+  background-color: #45a049;
+}

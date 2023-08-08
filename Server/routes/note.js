@@ -9,7 +9,7 @@ router.post("/createNote", createNote);
 router.get("/notes", getAllNotes);
 
 // Get a Unique Notes.
-router.post("/notes/:id/notes", getUserNotes);
+router.post("/:id/notes", getUserNotes);
 
 // Update A Notes.
 

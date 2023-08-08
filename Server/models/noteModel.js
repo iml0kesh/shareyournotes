@@ -6,6 +6,9 @@ const noteSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    noteIs: {
+
+    },
     title: {
       type: String,
       required: true,

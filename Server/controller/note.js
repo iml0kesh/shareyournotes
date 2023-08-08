@@ -24,8 +24,20 @@ const getAllNotes = async (req, res) => {
   }
 };
 
-const getUserNotes = (req, res) => {
+const getUserNotes = async (req, res) => {
   try {
+    const { id } = req.params;
+    const note = await Note.find({ userId: id });
+    res.status(200).json([{ note }]);
+  } catch (err) {
+    res.status(400).json({ msg: "Something went wrong", err });
+  }
+};
+
+const updateUserNote = async (req, res) => {
+  try {
+    const { id} = req.params;
+    const note = await Note.findOne;
   } catch (err) {
     res.status(400).json({ msg: "Something went wrong", err });
   }

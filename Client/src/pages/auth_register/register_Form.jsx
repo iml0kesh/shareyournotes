@@ -51,26 +51,45 @@ const RegForm = () => {
   };
 
   return (
-    <div>
-      <h1>This is form</h1>
+    <div className="reg-body">
+      <form className="reg-form">
+        <h1>Register Bro</h1>
+        <br />
+        <label className="reg-form-label">Name</label>
+        <input
+          className="reg-input"
+          type="text"
+          placeholder="name"
+          onChange={handleName}
+        />
 
-      <form>
-        <label>Name</label>
-        <input type="text" placeholder="name" onChange={handleName} />
+        <label className="reg-form-label">Userid</label>
+        <input
+          className="reg-input"
+          type="text"
+          placeholder="userid"
+          onChange={handleUserId}
+        />
 
-        <label>Userid</label>
-        <input type="text" placeholder="userid" onChange={handleUserId} />
+        <label className="reg-form-label">Email</label>
+        <input
+          className="reg-input"
+          type="text"
+          placeholder="email"
+          onChange={handleEmail}
+        />
 
-        <label>Email</label>
-        <input type="text" placeholder="email" onChange={handleEmail} />
+        <label className="reg-form-label">Password</label>
+        <input
+          className="reg-input"
+          type="text"
+          placeholder="password"
+          onChange={handlePassword}
+        />
 
-        <label>Password</label>
-        <input type="text" placeholder="password" onChange={handlePassword} />
-
-        <button type="submit" onClick={handleSubmit}>
+        <button className="reg-submit-btn" type="submit" onClick={handleSubmit}>
           create
         </button>
-        
       </form>
     </div>
   );
