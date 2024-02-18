@@ -1,12 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const { createNote, getAllNotes, getUserNotes } = require("../controller/note");
+const auth = require("../middleware/checkLogin");
+const {
+  createNote,
+  getAllNotes,
+  getUserNotes,
+} = require("../controllers/note");
 
 // Create a Notes.
-router.post("/createNote", createNote);
+router.post("/createNote", auth, createNote);
 
 // Get All Notes.
-router.get("/notes", getAllNotes);
+router.get("/notes", auth, getAllNotes);
 
 // Get a Unique Notes.
 router.post("/:id/notes", getUserNotes);

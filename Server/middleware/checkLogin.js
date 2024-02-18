@@ -1,20 +1,18 @@
 const jwt = require("jsonwebtoken");
 
-const IsLogin = (req, res, next) => {
+const auth = (req, res, next) => {
   try {
-    // GET THE USER FROM
-    const authtoken = req.header("authtoken");
-    if (!authtoken) {
-      res.status(401).json("BRO GO AWAY!");
-    }
-    const data = jwt.verify(authtoken, process.env.JWT_SECRET);
-    req.user = data.user;
+    const auth_token = req.header("x-auth-token");
+    if (!auth_token) return res.status(401).json("BRO GO AWAY! No Token");
+
+    const data = jwt.verify(auth_token, process.env.JWT_SECRET);
+    req.user = data;
     next();
   } catch (error) {
     res
       .status(500)
-      .json({ msg: "Bro somwthing went wrong", error: error.stack });
+      .json({ msg: "Bro something went wrong", error: error.stack });
   }
 };
 
-module.exports = IsLogin;
+module.exports = auth;

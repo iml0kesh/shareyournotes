@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
+// To serve static files {CSS Files}
+
 // Database Connection status
 db;
 
@@ -22,7 +24,8 @@ app.use("/auth", authRoutes);
 // NOTE ROUTES
 app.use("/note", noteRoutes);
 
+// Render all Notes.
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is up and running on port ${process.env.PORT}`);
+app.listen(3001, () => {
+  console.log(`Server is up and running on port 3001`);
 });

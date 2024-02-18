@@ -1,0 +1,40 @@
+[
+  {
+    "_id": { "$oid": "65c725d9f0f1adb11eeca114" },
+    "userName": "Alice Johnson",
+    "userId": "alice.johnson@example.com",
+    "userEmail": "alice.johnson@example.com",
+    "userPassword": "Alice@1234",
+    "userNotes": [
+      {
+        "title": "Weekend Plans",
+        "content": "Go hiking in the park, meet friends for dinner, watch a movie.",
+        "_id": { "$oid": "65c725d9f0f1adb11eeca115" }
+      },
+      {
+        "title": "Grocery List",
+        "content": "Milk, bread, eggs, apples, tomatoes.",
+        "_id": { "$oid": "65c725d9f0f1adb11eeca116" }
+      }
+    ]
+  },
+  {
+    "_id": { "$oid": "65c725d9f0f1adb11eeca117" },
+    "userName": "Bob Smith",
+    "userId": "bob.smith@example.com",
+    "userEmail": "bob.smith@example.com",
+    "userPassword": "Bob$Password",
+    "userNotes": [
+      {
+        "title": "Book Recommendations",
+        "content": "The Martian, 1984, Project Hail Mary.",
+        "_id": { "$oid": "65c725d9f0f1adb11eeca118" }
+      },
+      {
+        "title": "Work To-Do List",
+        "content": "Finish proposal report, attend team meeting, call client.",
+        "_id": { "$oid": "65c725d9f0f1adb11eeca119" }
+      }
+    ]
+  }
+]

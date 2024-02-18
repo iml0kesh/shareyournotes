@@ -1,4 +1,5 @@
-const Note = require("../models/noteModel");
+// const Note = require("../models/noteModel");
+const User = require("../models/userModel");
 
 const createNote = async (req, res) => {
   try {
@@ -16,12 +17,10 @@ const createNote = async (req, res) => {
 };
 
 const getAllNotes = async (req, res) => {
-  try {
-    const note = await Note.find();
-    res.status(200).json([{ note }]);
-  } catch (err) {
-    res.status(400).json({ msg: "Something went wrong", err });
-  }
+  const Id = req.user._id;
+  const Demo = await User.find({ _id: Id });
+  res.send(Demo);
+  res.send("Hello i am under water");
 };
 
 const getUserNotes = async (req, res) => {
@@ -36,7 +35,7 @@ const getUserNotes = async (req, res) => {
 
 const updateUserNote = async (req, res) => {
   try {
-    const { id} = req.params;
+    const { id } = req.params;
     const note = await Note.findOne;
   } catch (err) {
     res.status(400).json({ msg: "Something went wrong", err });

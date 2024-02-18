@@ -15,30 +15,22 @@ const MiniCardNote = () => {
 
   // getNotes("http:/localhost:3001/note/notes");
 
-  const [miniCard, setMiniCard] = useState([]);
+  const data = [
+    {
+      title: "Note 1",
+      notes: "This is the content of Note 1.",
+    },
+    {
+      title: "Note 2",
+      notes: "This is the content of Note 2.",
+    },
+    {
+      title: "Note 3",
+      notes: "This is the content of Note 3.",
+    },
+  ];
 
-  async function getNotes() {
-    try {
-      const response = await fetch("http://localhost:3001/note/notes", {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const notesData = await response.json();
-      console.log(notesData[0].note);
-      setMiniCard(notesData[0].note);
-    } catch (err) {
-      console.error("BRO error", err);
-    }
-  }
-
-  useEffect(() => {
-    getNotes();
-  }, {});
-
-  // getNotes();
+  const [miniCard, setMiniCard] = useState(data);
 
   return (
     <div>
