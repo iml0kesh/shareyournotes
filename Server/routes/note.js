@@ -5,7 +5,7 @@ const {
   createNote,
   getAllNotes,
   getUserNotes,
-} = require("../controllers/note");
+} = require("../controllers/noteCtrl");
 
 // Create a Notes.
 router.post("/createNote", auth, createNote);

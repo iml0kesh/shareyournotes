@@ -7,14 +7,12 @@ const header = () => {
       <div className="nav">
         <ul>
           <li>
-            <a href="">Subjects</a>
-          </li>
-          <li>
-            <a href="">Contact</a>
-          </li>
-          <li>About Us</li>
-          <li>
             <a href="/userlogin">Login</a>
+          </li>
+          <li>
+            <a href="/userlogin">
+              <button>Get Started</button>
+            </a>
           </li>
         </ul>
       </div>

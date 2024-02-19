@@ -4,11 +4,10 @@ import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 
-import Landpage from "./pages/Home/index";
+import Landpage from "./pages/Home/landPage";
 import Register from "./pages/auth_register";
-import Login from "./pages/auth_login/login_Form"; 
-import CreateNote from "./pages/Notes";
-import UserNotes from "./pages/SavedNotes/UserSavedNotes";
+import Login from "./pages/auth_login/login_Form";
+import Main from "./pages/UserNotes/mainarea";
 
 function App() {
   return (
@@ -17,16 +16,10 @@ function App() {
         <Route path="/" element={<Landpage />} />
 
         {/* Auth Routes */}
-        <Route path="/userregister" element={<Register />} />
-        <Route path="/userlogin" element={<Login />} />
+        <Route path="/user_register" element={<Register />} />
+        <Route path="/user_login" element={<Login />} />
 
-        {/* Note Routes */}
-        <Route path="/createnote" element={<CreateNote />} />
-        <Route path="/usernotes" element={<UserNotes />} />
-
-        {/* User Routes */}
-        <Route path="/usernote" element={<UserNotes />} />
-        
+        <Route path="/post_note" element={<Main />} />
       </Routes>
     </>
   );

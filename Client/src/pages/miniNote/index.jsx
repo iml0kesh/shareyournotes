@@ -18,7 +18,8 @@ const MiniCardNote = () => {
   const data = [
     {
       title: "Note 1",
-      notes: "This is the content of Note 1.",
+      notes:
+        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis pariatur facere consequuntur cumque sapiente provident aliquid ab sint ex ullam beatae consectetur ducimus alias eos dolore nostrum, quaerat dolor a?",
     },
     {
       title: "Note 2",

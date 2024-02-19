@@ -56,13 +56,13 @@ const MainArea = () => {
         </div>
         <div>
           <div className="sec-bottom-title"></div>
-          {/* Rendring all the notes */}
+          {/* Rendering all the notes */}
           {components.map((component) => (
             <Sublist
               listTitle={component.title}
               id={component.id}
-              // This handleClick will render the correspoinding Text area. 
-              handleClick={openNote} 
+              // This handleClick will render the corresponding Text area.
+              handleClick={openNote}
             />
           ))}
         </div>

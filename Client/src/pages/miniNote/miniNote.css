@@ -1,21 +1,27 @@
-/* MiniNote.css */
-
-.mini-note-card {
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+.mini-note {
+  margin: 2% 25% 2% 25%;
+  padding: 0px 0px 10px 0px;
+  background-color: rgb(204, 203, 205);
+  color: black;
+  border-radius: 18px;
+  overflow: hidden;
 }
 
 .note-title {
-  color: #333;
-  font-size: 18px;
-  margin-bottom: 8px;
+  /* border: 1px red solid; */
+  padding: 10px 0px 0px 15px;
+  width: max-content;
+  font-size: 25px;
 }
 
-.note-content {
-  color: #555;
-  font-size: 14px;
+.info-tags {
+  display: flex;
+  /* border: 1px red solid; */
+  width: max-content;
+  gap: 20px;
+  padding: 0px 0px 0px 15px;
+}
+
+.content {
+  padding: 0px 0px 0px 15px;
 }
