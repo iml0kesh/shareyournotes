@@ -1,14 +1,24 @@
 const Note = require("../models/noteModel");
 const User = require("../models/userModel");
 
+// Get All Notes
+const getAllNotes = async (req, res) => {
+  try {
+    const data = await Note.find();
+    res.json(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // Create a Note
 const createNote = async (req, res) => {
   try {
-    const { title, notes } = req.body;
+    const { title, content, userId } = req.body;
     const newNote = new Note({
       title,
-      notes,
-      userId: req.user.id,
+      content,
+      userId,
     });
 
     await newNote.save();
@@ -18,29 +28,29 @@ const createNote = async (req, res) => {
   }
 };
 
-// All Notes in Database of a particular {User}
-const getAllNotes = async (req, res) => {
-  const notes = await Note.find({ userId: req.user.id });
-  res.json(notes);
-  res.send("Hello i am under water");
-};
-
-// Delete Note with id
 const deleteNote = async (req, res) => {
   try {
     await Note.findByIdAndDelete(req.params.id);
     res.json({ msg: "Note Deleted" });
   } catch (err) {
-    return res.status(500).json({ msg: error.message });
+    return res.status(500).json({ msg: err.message });
   }
 };
 
-//
-const updateUserNote = async (req, res) => {
+const updateNote = async (req, res) => {
   try {
+    const { title, content } = req.body;
+    await Note.findByIdAndUpdate(
+      { _id: req.params.id },
+      {
+        title,
+        content,
+      }
+    );
+    res.json({ msg: "Updated a Note" });
   } catch (err) {
-    res.status(500).json({ msg: err.message });
+    return res.status(500).json({ msg: err.message });
   }
 };
 
-module.exports = { createNote, getAllNotes, getUserNotes };
+module.exports = { getAllNotes, createNote, deleteNote, updateNote };

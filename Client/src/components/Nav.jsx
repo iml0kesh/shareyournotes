@@ -1,16 +1,20 @@
 import React from "react";
 
-const header = () => {
+const Nav = ({ setIsLogin }) => {
   return (
     <div className="navbar">
       <div className="logo">Share Your Notes</div>
       <div className="nav">
         <ul>
           <li>
-            <a href="/userlogin">Login</a>
+            {setIsLogin ? (
+              <a href="/login">Login</a>
+            ) : (
+              <a href="/logout">Logout</a>
+            )}
           </li>
           <li>
-            <a href="/userlogin">
+            <a href="/register">
               <button>Get Started</button>
             </a>
           </li>
@@ -20,4 +24,4 @@ const header = () => {
   );
 };
 
-export default header;
+export default Nav;

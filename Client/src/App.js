@@ -1,25 +1,36 @@
-import React from "react";
-
-import { Routes, Route } from "react-router-dom";
-
+import React, { useState, useEffect } from "react";
+import { Routes, Route, Await } from "react-router-dom";
 import "./App.css";
 
-import Landpage from "./pages/Home/landPage";
-import Register from "./pages/auth_register";
-import Login from "./pages/auth_login/login_Form";
-import Main from "./pages/UserNotes/mainarea";
+import Nav from "./components/Nav";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import axios from "axios";
 
 function App() {
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      const token = localStorage.getItem("activeToken");
+      if (token) {
+        const verified = await axios.get("http://localhost:3001/users/verify", {
+          headers: { Authorization: token },
+        });
+        setIsLogin(verified.data);
+      } else {
+        setIsLogin(false);
+      }
+    };
+    checkLogin();
+  }, []);
+
   return (
     <>
+      <Nav setIsLogin={isLogin} />
       <Routes>
-        <Route path="/" element={<Landpage />} />
-
-        {/* Auth Routes */}
-        <Route path="/user_register" element={<Register />} />
-        <Route path="/user_login" element={<Login />} />
-
-        <Route path="/post_note" element={<Main />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
       </Routes>
     </>
   );

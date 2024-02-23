@@ -1,12 +1,10 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
-const auth = require("../middleware/checkLogin")
+const Auth = require("../middleware/auth");
 
 // ------------------------------------------------------------------------
 // Function for User Registration.
-
-// Need to implement Validate Functions
 
 const userRegister = async (req, res) => {
   try {
@@ -28,10 +26,7 @@ const userRegister = async (req, res) => {
 
     await newUser.save();
 
-    const auth_token = jwt.sign(userId, process.env.JWT_SECRET);
-    res.header("x-auth-token", auth_token).status(201).json({ auth_token });
-
-    // res.status(201).json({ auth_token });
+    res.status(201).json({ msg: "Register Success" });
   } catch (err) {
     console.log(err);
     res.status(500).json({ msg: "bro something went wrong", err: err });
@@ -51,37 +46,46 @@ const userLogin = async (req, res) => {
     // Searching for userEmail from DB. (if not exist create new account.)
     const user = await User.findOne({ userEmail: userEmail });
     if (!user) {
-      res.status(400).json("Bro Broke!");
+      res.status(400).json("Not registered!");
     }
 
     // Checking for Right Password.
     const comparePass = await bcrypt.compare(userPassword, user.userPassword);
     if (!comparePass) {
-      res.status(400).json("Bro wrong pass myan");
+      res.status(400).json("Bro wrong pass");
     }
 
     // Space for Token Generation
-    const auth_token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+    const activeToken = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
     delete user.userPassword;
 
-    res.status(200).json({ msg: "Bro login success", auth_token });
+    res.status(200).json({ activeToken });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-const userDetails = async (req, res) => {
+const userVerify = (req, res) => {
   try {
-    const { userId } = req.params;
-    const user = await User.findOne({ userId: userId });
-    res.status(200).json({ user });
+    const token = req.header("Authorization");
+    console.log(token);
+    if (!token) return res.send(false);
+
+    jwt.verify(token, process.env.JWT_SECRET, async (err, verified) => {
+      if (err) return res.send(false);
+
+      const user = await User.findById(verified._id);
+      if (!user) return res.send(false);
+
+      return res.send(true);
+    });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.log(error);
   }
 };
 
 module.exports = {
   userRegister,
   userLogin,
-  userDetails,
+  userVerify,
 };

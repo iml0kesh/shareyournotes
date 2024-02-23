@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const auth = (req, res, next) => {
   try {
-    const auth_token = req.header("x-auth-token");
+    const auth_token = req.header("activeToken");
     if (!auth_token) return res.status(401).json("BRO GO AWAY! No Token");
 
     const data = jwt.verify(auth_token, process.env.JWT_SECRET);
