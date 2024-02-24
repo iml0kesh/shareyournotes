@@ -1,7 +1,243 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
+
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
 
 * {
-    font-family: 'Roboto Condensed', sans-serif;
-    /* background-color: #111827; */
-    margin: 0%;
+  font-family: "Roboto Condensed", sans-serif;
+  /* background-color: #19191a; */
+  /* background: #191919; */
+  margin: 0%;
+}
+
+body {
+  background-color: #0f0e0e;
+}
+
+/* Navbar */
+.navbar {
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  margin-top: auto;
+  height: 80px;
+  align-items: center;
+  border: 1px solid;
+}
+
+.logo {
+  color: black;
+  font-size: 1.5rem;
+}
+
+.nav ul {
+  display: flex;
+  padding-left: 0px;
+  justify-content: space-around;
+  list-style: none;
+}
+
+.nav ul li {
+  margin: 0 10px;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+.nav ul li a {
+  text-decoration: none;
+  color: black;
+  transition: color 0.1s;
+}
+
+.nav ul li:hover {
+  background-color: black;
+}
+
+.nav ul li:hover a {
+  color: white;
+}
+
+/* Home */
+
+.landpage {
+  background-color: #000000;
+  height: 100vh;
+}
+
+.addNote-btn {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  border: 1px red solid;
+}
+
+.section1 {
+  text-align: center;
+  padding-bottom: 50px;
+  background-color: black;
+}
+
+.head1 {
+  padding-top: 8%;
+  font-size: 3.75rem;
+  color: white;
+  text-align: center;
+}
+
+/* Home Note Css */
+.notes-container {
+  margin: 0px 20px 0px 20px;
+  display: flex;
+  background-color: #0f0e0e;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  gap: 40px;
+  /* border: 1px solid white; */
+  border-radius: 16px;
+}
+
+.note-card {
+  box-sizing: border-box;
+  box-shadow: 0px 0px 5px 1px rgba(93, 91, 91, 0.6);
+  border-radius: 10px;
+  width: 300px;
+  overflow: hidden;
+}
+
+.note-card h1 {
+  background-color: #f9e8c9;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.note-card p {
+  background-color: rgb(26, 25, 26);
+  color: white;
+  font-size: 16px;
+  padding: 10px;
+  height: 300px;
+  overflow: hidden;
+}
+
+/* Login Page */
+.login-page {
+  /* background-color: #000000; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  /* background: rgba(0, 0, 0, 0.5); */
+  box-sizing: border-box;
+  box-shadow: 0px 0px 5px 5px rgba(93, 91, 91, 0.6);
+  border-radius: 10px;
+}
+.login-page h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.login-form .user-box {
+  position: relative;
+}
+
+.login-form .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+
+.Submit {
+  background-color: #f9e8c9;
+  border-radius: 4px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0;
+  max-width: none;
+  min-height: 44px;
+  min-width: 10px;
+  outline: none;
+  padding: 9px 20px 8px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.login-form button:hover {
+  background-color: #897556;
+}
+
+.footer {
+  color: rgb(129, 125, 125);
+  font-size: 16px;
+  margin-top: 16px;
+  text-align: center;
+}
+
+.footer span {
+  color: #f9e8c9;
+  cursor: pointer;
+}
+
+/* Register Page */
+.register-page {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  /* background: rgba(0, 0, 0, 0.5); */
+  box-sizing: border-box;
+  box-shadow: 0px 0px 5px 5px rgba(93, 91, 91, 0.6);
+  border-radius: 10px;
+}
+.register-page h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.register-form .user-box {
+  position: relative;
+}
+
+.register-form .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
 }

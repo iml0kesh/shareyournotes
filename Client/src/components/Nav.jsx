@@ -1,22 +1,22 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Nav = ({ setIsLogin }) => {
+const Nav = ({ isLogin, setIsLogin }) => {
+  // console.log({ isLogin, setIsLogin });
   return (
     <div className="navbar">
       <div className="logo">Share Your Notes</div>
       <div className="nav">
         <ul>
           <li>
-            {setIsLogin ? (
-              <a href="/login">Login</a>
+            {isLogin ? (
+              <Link to="/logout">Logout</Link>
             ) : (
-              <a href="/logout">Logout</a>
+              <Link to="/login">Login</Link>
             )}
           </li>
           <li>
-            <a href="/register">
-              <button>Get Started</button>
-            </a>
+            <Link to="/usernotes">My Notes</Link>
           </li>
         </ul>
       </div>

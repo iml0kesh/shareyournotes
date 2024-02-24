@@ -68,7 +68,6 @@ const userLogin = async (req, res) => {
 const userVerify = (req, res) => {
   try {
     const token = req.header("Authorization");
-    console.log(token);
     if (!token) return res.send(false);
 
     jwt.verify(token, process.env.JWT_SECRET, async (err, verified) => {

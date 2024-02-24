@@ -28,6 +28,16 @@ const createNote = async (req, res) => {
   }
 };
 
+// Get User Notes
+const getUserNotes = async (req, res) => {
+  try {
+    const notes = await Note.find({ name: req.user.name });
+    res.json(notes);
+  } catch (err) {
+    res.status(500).json({ msg: "Something went wrong", err });
+  }
+};
+
 const deleteNote = async (req, res) => {
   try {
     await Note.findByIdAndDelete(req.params.id);
@@ -53,4 +63,10 @@ const updateNote = async (req, res) => {
   }
 };
 
-module.exports = { getAllNotes, createNote, deleteNote, updateNote };
+module.exports = {
+  getAllNotes,
+  createNote,
+  getUserNotes,
+  deleteNote,
+  updateNote,
+};

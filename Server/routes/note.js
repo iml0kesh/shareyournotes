@@ -4,6 +4,7 @@ const auth = require("../middleware/auth");
 const {
   getAllNotes,
   createNote,
+  getUserNotes,
   updateNotes,
   deleteNote,
 } = require("../controllers/noteCtrl");
@@ -13,6 +14,9 @@ router.post("/createNote", auth, createNote);
 
 // Get All Notes.
 router.get("/notes", getAllNotes);
+
+// Get User Notes.
+router.get("/usernotes", getUserNotes);
 
 // // Update A Notes.
 // router.put("/:id", auth, updateNotes);

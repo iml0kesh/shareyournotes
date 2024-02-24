@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Await } from "react-router-dom";
+import { Routes, Route, Router, BrowserRouter } from "react-router-dom";
 import "./App.css";
 
-import Nav from "./components/Nav";
+import axios from "axios";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import axios from "axios";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -26,13 +25,15 @@ function App() {
   }, []);
 
   return (
-    <>
-      <Nav setIsLogin={isLogin} />
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
+        <Route
+          path="/"
+          element={<Home isLogin={isLogin} setIsLogin={setIsLogin} />}
+        />
+        <Route path="/login" element={<Login />} />
       </Routes>
-    </>
+    </BrowserRouter>
   );
 }
 
