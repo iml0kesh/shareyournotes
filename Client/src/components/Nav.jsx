@@ -1,14 +1,28 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Nav = ({ isLogin, setIsLogin }) => {
-  // console.log({ isLogin, setIsLogin });
+const Nav = ({ userN, setMyNotes }) => {
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    const checkLogin = () => {
+      const token = localStorage.getItem("activeToken");
+      token ? setIsLogin(true) : setIsLogin(false);
+    };
+    checkLogin();
+  }, []);
+
+  const logoutSubmit = () => {
+    localStorage.clear();
+    setIsLogin(false);
+  };
+
   return (
     <div className="navbar">
       <div className="logo">Share Your Notes</div>
       <div className="nav">
         <ul>
-          <li>
+          <li onClick={logoutSubmit}>
             {isLogin ? (
               <Link to="/logout">Logout</Link>
             ) : (
@@ -16,7 +30,9 @@ const Nav = ({ isLogin, setIsLogin }) => {
             )}
           </li>
           <li>
-            <Link to="/usernotes">My Notes</Link>
+            <button onClick={() => setMyNotes((prevView) => !prevView)}>
+              {userN ? "All Notes" : "My Notes"}
+            </button>
           </li>
         </ul>
       </div>

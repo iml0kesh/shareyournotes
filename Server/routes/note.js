@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/auth");
+const myNotes = require("../middleware/myNotes");
+
 const {
   getAllNotes,
   createNote,
@@ -9,6 +11,8 @@ const {
   deleteNote,
 } = require("../controllers/noteCtrl");
 
+const { userVerify } = require("../controllers/userCtrl");
+
 // Create a Notes.
 router.post("/createNote", auth, createNote);
 
@@ -16,7 +20,7 @@ router.post("/createNote", auth, createNote);
 router.get("/notes", getAllNotes);
 
 // Get User Notes.
-router.get("/usernotes", getUserNotes);
+router.get("/usr", myNotes, getUserNotes);
 
 // // Update A Notes.
 // router.put("/:id", auth, updateNotes);

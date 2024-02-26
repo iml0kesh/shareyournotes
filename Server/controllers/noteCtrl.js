@@ -31,10 +31,11 @@ const createNote = async (req, res) => {
 // Get User Notes
 const getUserNotes = async (req, res) => {
   try {
-    const notes = await Note.find({ name: req.user.name });
+    const notes = await Note.find({ userId: req.user.userId });
     res.json(notes);
   } catch (err) {
-    res.status(500).json({ msg: "Something went wrong", err });
+    console.error(err);
+    res.status(500).json({ msg: "Something went wrong", error: err.message });
   }
 };
 

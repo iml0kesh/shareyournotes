@@ -241,3 +241,13 @@ body {
   outline: none;
   background: transparent;
 }
+
+/* overlay Card */
+
+.overlay {
+  background-color: white;
+  border: 1px red solid;
+  position: absolute;
+  right: 50%;
+  top: 50%;
+}

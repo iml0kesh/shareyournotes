@@ -56,7 +56,10 @@ const userLogin = async (req, res) => {
     }
 
     // Space for Token Generation
-    const activeToken = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+    const activeToken = jwt.sign(
+      { userId: user.userId },
+      process.env.JWT_SECRET
+    );
     delete user.userPassword;
 
     res.status(200).json({ activeToken });
@@ -67,7 +70,7 @@ const userLogin = async (req, res) => {
 
 const userVerify = (req, res) => {
   try {
-    const token = req.header("Authorization");
+    const token = req.header("activeToken");
     if (!token) return res.send(false);
 
     jwt.verify(token, process.env.JWT_SECRET, async (err, verified) => {
