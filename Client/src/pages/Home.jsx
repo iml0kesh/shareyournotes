@@ -16,6 +16,7 @@ const Home = ({ isLogin, setIsLogin }) => {
   }, []);
 
   // To get Only the users Notes.
+  const [userId, setUserId] = useState("");
   const [userNotes, setUserNotes] = useState([]);
   const [userN, setMyNotes] = useState(false);
   const [token, setToken] = useState("");
@@ -29,14 +30,16 @@ const Home = ({ isLogin, setIsLogin }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("activeToken");
+    const user = localStorage.getItem("userId");
     setToken(token);
     if (token) {
       getUserNotes(token);
+      setUserId(user);
     } else {
       setUserNotes([
         {
           _id: "9999",
-          title: "OppS",
+          title: "Opps",
           content: "You need to login to see your notes.",
         },
       ]);
@@ -76,12 +79,20 @@ const Home = ({ isLogin, setIsLogin }) => {
                 >
                   <h1 title={note.title}>{note.title}</h1>
                   <p>{note.content}</p>
+                  <div className="card-footer">
+                    <div className="f-comp">{note.userId}</div>
+                    <div className="f-comp">2 days ago</div>
+                  </div>
                 </div>
               ))
             : userNotes.map((note) => (
                 <div className="note-card" key={note._id}>
                   <h1 title={note.title}>{note.title}</h1>
                   <p>{note.content}</p>
+                  <div className="card-footer">
+                    <div className="f-comp">EDIT</div>
+                    <div className="f-comp">2 days ago</div>
+                  </div>
                 </div>
               ))}
         </div>
@@ -89,9 +100,20 @@ const Home = ({ isLogin, setIsLogin }) => {
       {selectedCard && (
         <div className="overlay">
           <div className="overlay-content">
-            <h1>{selectedCard.title}</h1>
+            <div className="note-header">
+              <h1>{selectedCard.title}</h1>
+              <h4 className="close" onClick={closeOverlay}>
+                {" "}
+                X
+              </h4>
+            </div>
             <p>{selectedCard.content}</p>
-            <button onClick={closeOverlay}>Close</button>
+            {userId === selectedCard.userId && (
+              <div className="card-footer">
+                <div className="f-comp">EDIT</div>
+                <div className="f-comp">2 days ago</div>
+              </div>
+            )}
           </div>
         </div>
       )}

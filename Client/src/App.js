@@ -5,6 +5,8 @@ import "./App.css";
 import axios from "axios";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import { CreateNote } from "./pages/CreateNote";
+import { UpdateNote } from "./pages/UpdateNote";
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/create" element={<CreateNote />} />
+        <Route path="/update/:id" element={<UpdateNote />} />
       </Routes>
     </BrowserRouter>
   );

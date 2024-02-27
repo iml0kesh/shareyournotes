@@ -6,6 +6,7 @@ const auth = (req, res, next) => {
     if (!auth_token) return res.status(401).json("BRO GO AWAY! No Token");
 
     const data = jwt.verify(auth_token, process.env.JWT_SECRET);
+    req.body.userId = data.userId;
     req.user = data;
     next();
   } catch (error) {

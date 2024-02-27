@@ -32,6 +32,7 @@ const createNote = async (req, res) => {
 const getUserNotes = async (req, res) => {
   try {
     const notes = await Note.find({ userId: req.user.userId });
+    notes.user;
     res.json(notes);
   } catch (err) {
     console.error(err);

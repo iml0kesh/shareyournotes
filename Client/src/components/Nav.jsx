@@ -30,9 +30,9 @@ const Nav = ({ userN, setMyNotes }) => {
             )}
           </li>
           <li>
-            <button onClick={() => setMyNotes((prevView) => !prevView)}>
+            <p onClick={() => setMyNotes((prevView) => !prevView)}>
               {userN ? "All Notes" : "My Notes"}
-            </button>
+            </p>
           </li>
         </ul>
       </div>

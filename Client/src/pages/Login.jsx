@@ -52,7 +52,9 @@ const Login = () => {
       });
 
       const token = res.data.activeToken;
+      const userId = res.data.userId;
       localStorage.setItem("activeToken", token);
+      localStorage.setItem("userId", userId);
       navigate("/");
     } catch (error) {
       console.log(error);

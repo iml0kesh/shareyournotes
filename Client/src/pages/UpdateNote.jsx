@@ -1,44 +1,33 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 
-export const CreateNote = () => {
+export const UpdateNote = () => {
   const [note, setNote] = useState({
     title: "",
     content: "",
+    id: "",
   });
 
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("activeToken");
+    if (id) {
+      try {
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  });
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNote({ ...note, [name]: value });
   };
 
-  const navigate = useNavigate();
-
-  const createNote = async (e) => {
-    e.preventDefault();
-    try {
-      const token = localStorage.getItem("activeToken");
-      if (token) {
-        const { title, content } = note;
-        const newNote = {
-          title,
-          content,
-        };
-        console.log(newNote);
-        await axios.post("http://localhost:3001/note/createnote", newNote, {
-          headers: { activeToken: token },
-        });
-      }
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-      navigate("/");
-    }
-  };
-
+  // const editNote
   return (
-    <form onSubmit={createNote}>
+    <form>
       <div className="overlay">
         <div className="overlay-content">
           <div className="note-header">

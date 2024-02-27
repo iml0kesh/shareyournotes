@@ -60,9 +60,11 @@ const userLogin = async (req, res) => {
       { userId: user.userId },
       process.env.JWT_SECRET
     );
+
+    const userId = user.userId;
     delete user.userPassword;
 
-    res.status(200).json({ activeToken });
+    res.status(200).json({ activeToken, userId });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
