@@ -65,10 +65,20 @@ const updateNote = async (req, res) => {
   }
 };
 
+const getNote = async (req, res) => {
+  try {
+    const note = await Note.findById(req.params.id);
+    res.json(note);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   getAllNotes,
   createNote,
   getUserNotes,
   deleteNote,
   updateNote,
+  getNote,
 };

@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 
@@ -12,22 +13,57 @@ export const UpdateNote = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("activeToken");
-    if (id) {
-      try {
-      } catch (error) {
-        console.log(error);
+    const getNote = async () => {
+      const token = localStorage.getItem("activeToken");
+      if (id) {
+        try {
+          const res = await axios.get(`http://localhost:3001/note/${id}`, {
+            headers: { activeToken: token },
+          });
+          setNote({
+            title: res.data.title,
+            content: res.data.content,
+            id: res.data._id,
+          });
+        } catch (err) {
+          console.log(err);
+          navigate("/");
+        }
       }
-    }
-  });
+    };
+    getNote();
+  }, [id, navigate]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNote({ ...note, [name]: value });
   };
 
+  const editNote = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem("activeToken");
+      if (token) {
+        const { title, content, id } = note;
+        const newNote = {
+          title,
+          content,
+        };
+        await axios.put(`http://localhost:3001/note/edit/${id}`, newNote, {
+          headers: { activeToken: token },
+        });
+      }
+
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      navigate("/");
+    }
+  };
+
   // const editNote
   return (
-    <form>
+    <form onSubmit={editNote}>
       <div className="overlay">
         <div className="overlay-content">
           <div className="note-header">

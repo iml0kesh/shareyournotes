@@ -22,17 +22,17 @@ const Nav = ({ userN, setMyNotes }) => {
       <div className="logo">Share Your Notes</div>
       <div className="nav">
         <ul>
+          <li>
+            <p onClick={() => setMyNotes((prevView) => !prevView)}>
+              {userN ? "All Notes" : "My Notes"}
+            </p>
+          </li>
           <li onClick={logoutSubmit}>
             {isLogin ? (
               <Link to="/logout">Logout</Link>
             ) : (
               <Link to="/login">Login</Link>
             )}
-          </li>
-          <li>
-            <p onClick={() => setMyNotes((prevView) => !prevView)}>
-              {userN ? "All Notes" : "My Notes"}
-            </p>
           </li>
         </ul>
       </div>

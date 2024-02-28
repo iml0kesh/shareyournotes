@@ -7,8 +7,9 @@ const {
   getAllNotes,
   createNote,
   getUserNotes,
-  updateNotes,
+  updateNote,
   deleteNote,
+  getNote,
 } = require("../controllers/noteCtrl");
 
 const { userVerify } = require("../controllers/userCtrl");
@@ -22,10 +23,13 @@ router.get("/notes", getAllNotes);
 // Get User Notes.
 router.get("/usr", myNotes, getUserNotes);
 
-// // Update A Notes.
-// router.put("/:id", auth, updateNotes);
+// Get Note
+router.get("/:id", auth, getNote);
+
+// Update A Notes.
+router.put("/edit/:id", auth, updateNote);
 
 // Delete a Notes.
-router.delete("/:id", auth, deleteNote);
+// router.delete("/:id", auth, deleteNote);
 
 module.exports = router;

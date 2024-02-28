@@ -15,7 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/create" element={<CreateNote />} />
-        <Route path="/update/:id" element={<UpdateNote />} />
+        <Route path="/edit/:id" element={<UpdateNote />} />
       </Routes>
     </BrowserRouter>
   );

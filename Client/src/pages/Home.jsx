@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import Nav from "../components/Nav";
 
@@ -86,11 +87,15 @@ const Home = ({ isLogin, setIsLogin }) => {
                 </div>
               ))
             : userNotes.map((note) => (
-                <div className="note-card" key={note._id}>
+                <div
+                  className="note-card"
+                  key={note._id}
+                  onClick={() => handleCardClick(note)}
+                >
                   <h1 title={note.title}>{note.title}</h1>
                   <p>{note.content}</p>
                   <div className="card-footer">
-                    <div className="f-comp">EDIT</div>
+                    <Link to={`edit/${note._id}`}>Edit</Link>
                     <div className="f-comp">2 days ago</div>
                   </div>
                 </div>
@@ -109,9 +114,11 @@ const Home = ({ isLogin, setIsLogin }) => {
             </div>
             <p>{selectedCard.content}</p>
             {userId === selectedCard.userId && (
-              <div className="card-footer">
-                <div className="f-comp">EDIT</div>
-                <div className="f-comp">2 days ago</div>
+              <div className="card-footer-edit">
+                <Link to={`edit/${selectedCard._id}`} className="f-ecomp">
+                  Edit
+                </Link>
+                <div className="f-ecomp">2 days ago</div>
               </div>
             )}
           </div>
