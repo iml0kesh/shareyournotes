@@ -26,7 +26,7 @@ export const CreateNote = () => {
           content,
         };
         console.log(newNote);
-        await axios.post("http://localhost:3001/note/createnote", newNote, {
+        await axios.post("note/createnote", newNote, {
           headers: { activeToken: token },
         });
       }

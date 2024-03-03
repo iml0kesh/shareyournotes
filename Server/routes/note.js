@@ -30,6 +30,6 @@ router.get("/:id", auth, getNote);
 router.put("/edit/:id", auth, updateNote);
 
 // Delete a Notes.
-// router.delete("/:id", auth, deleteNote);
+router.delete("/delete/:id", auth, deleteNote);
 
 module.exports = router;

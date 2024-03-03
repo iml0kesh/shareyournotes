@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/shareyournotes", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://lokesh:lokesh@shareyournotes.lxsfd08.mongodb.net/notes?retryWrites=true&w=majority&appName=Shareyournotes",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => {
     console.log("Database connection success! (MongoDB)");
   })

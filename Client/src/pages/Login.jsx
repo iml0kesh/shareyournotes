@@ -4,6 +4,21 @@ import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [isLoginActive, setIsLoginActive] = useState(true);
+  const [err, setErr] = useState("");
+
+  const toggleForm = () => {
+    setIsLoginActive(!isLoginActive); // Toggle visibility based on current state
+  };
+
+  const loginFormStyle = {
+    display: isLoginActive ? "block" : "none",
+  };
+
+  const registerFormStyle = {
+    display: isLoginActive ? "none" : "block",
+  };
+
   const [user, setUser] = useState({
     userName: "",
     userId: "",
@@ -22,7 +37,7 @@ const Login = () => {
   const registerSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3001/users/register/", {
+      const res = await axios.post("users/register/", {
         userName: user.userName,
         userId: user.userId,
         userEmail: user.userEmail,
@@ -35,14 +50,16 @@ const Login = () => {
         userEmail: "",
         userPassword: "",
       });
-    } catch (error) {
-      console.log(error);
+
+      setIsLoginActive(true);
+    } catch (err) {
+      err.response.data.msg && setErr(err.response.data.msg);
     }
   };
   const loginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3001/users/login", {
+      const res = await axios.post("users/login", {
         userEmail: user.userEmail,
         userPassword: user.userPassword,
       });
@@ -59,20 +76,6 @@ const Login = () => {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const [isLoginActive, setIsLoginActive] = useState(true);
-
-  const toggleForm = () => {
-    setIsLoginActive(!isLoginActive); // Toggle visibility based on current state
-  };
-
-  const loginFormStyle = {
-    display: isLoginActive ? "block" : "none",
-  };
-
-  const registerFormStyle = {
-    display: isLoginActive ? "none" : "block",
   };
 
   return (
@@ -169,6 +172,7 @@ const Login = () => {
             You have a account?
             <span onClick={toggleForm}> Login Now! </span>
           </p>
+          <p>{err}</p>
         </form>
       </div>
     </section>

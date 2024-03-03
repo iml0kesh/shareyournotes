@@ -13,6 +13,11 @@ const userRegister = async (req, res) => {
       res.status(400).json({ msg: "Bro give all data" });
     }
 
+    const user = User.findOne({ userEmail });
+    if (user) {
+      return res.status(400).json({ msg: "Email Already Registered" });
+    }
+
     // SALT OF THE PASSWORD
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(userPassword, salt);
@@ -29,7 +34,7 @@ const userRegister = async (req, res) => {
     res.status(201).json({ msg: "Register Success" });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ msg: "bro something went wrong", err: err });
+    return res.status(500).json({ msg: "bro something went wrong", err: err });
   }
 };
 

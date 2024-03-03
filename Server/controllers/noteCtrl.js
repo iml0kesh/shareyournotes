@@ -42,6 +42,7 @@ const getUserNotes = async (req, res) => {
 
 const deleteNote = async (req, res) => {
   try {
+    console.log("Here");
     await Note.findByIdAndDelete(req.params.id);
     res.json({ msg: "Note Deleted" });
   } catch (err) {

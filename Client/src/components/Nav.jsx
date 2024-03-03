@@ -13,6 +13,7 @@ const Nav = ({ userN, setMyNotes }) => {
   }, []);
 
   const logoutSubmit = () => {
+    window.location.reload();
     localStorage.clear();
     setIsLogin(false);
   };
@@ -29,7 +30,7 @@ const Nav = ({ userN, setMyNotes }) => {
           </li>
           <li onClick={logoutSubmit}>
             {isLogin ? (
-              <Link to="/logout">Logout</Link>
+              <Link to="/">Logout</Link>
             ) : (
               <Link to="/login">Login</Link>
             )}

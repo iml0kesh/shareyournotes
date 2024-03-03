@@ -5,9 +5,7 @@ html {
   overflow-x: hidden;
 }
 ::-webkit-scrollbar {
-  width: 0; /* Remove scrollbar space */
-  /* background: transparent; */
-  /* optional: just make scrollbar invisible; */
+  width: 0;
 }
 
 * {
@@ -31,7 +29,7 @@ body {
   margin: 1% 5% 1% 5%;
   height: 80px;
   align-items: center;
-  /* border: 1px solid; */
+  /* border: 1px solid red; */
 }
 
 .logo {
@@ -73,49 +71,61 @@ body {
 /* Home */
 
 .landpage {
-  /* background-color: #000000; */
   height: 100vh;
 }
 
-.addNote-btn {
-  background-color: green;
-  color: white;
-  border: none;
-  padding: 10px;
-  font-size: 1.2rem;
-  border-radius: 10px;
-  border: 1px red solid;
-}
-
 .section1 {
-  text-align: center;
-  padding-bottom: 50px;
-  /* background-color: black; */
+  /* text-align: center; */
+  /* background-color: rebeccapurple; */
 }
 
 .head1 {
-  padding-top: 8%;
   font-size: 3.75rem;
   color: white;
   text-align: center;
+  /* background-color: chartreuse; */
 }
 
 /* Home Note Css */
 .notes-container {
   width: calc(100% - 30%);
   margin: 5%;
-  background-color: #232121;
+  /* background-color: #232121; */
   align-items: center;
   justify-content: center;
   padding: calc(100% - 90%);
   padding-top: 2%;
   padding-bottom: 2%;
-  gap: 40px;
+  /* gap: 40px; */
+  border-radius: 16px;
+  margin: calc(100% - 95%);
+}
+
+.notes-nav {
+  text-align: center;
+  font-size: 2rem;
+  margin: 2%;
+  margin-bottom: 4%;
+  align-items: center;
+}
+
+.notes-nav p {
+  width: fit-content;
+  color: white;
+  background-color: #0f0e0e;
+  padding: 1%;
+  border: white 1px solid;
+  border-radius: 16px;
+}
+.notes-nav p:hover {
+  color: rgb(151, 151, 150);
+  cursor: pointer;
+}
+
+.notes {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  border-radius: 16px;
-  margin: calc(100% - 95%);
 }
 
 .note-card {
@@ -170,10 +180,11 @@ body {
   color: white;
 }
 
+/* 
 .f-comp:hover {
   color: black;
   cursor: pointer;
-}
+} */
 
 .card-footer-edit {
   background-color: rgba(245, 222, 179, 0.718);
@@ -201,6 +212,7 @@ body {
   box-shadow: 0px 0px 5px 5px rgba(93, 91, 91, 0.6);
   border-radius: 10px;
 }
+
 .login-page h2 {
   margin: 0 0 30px;
   padding: 0;
