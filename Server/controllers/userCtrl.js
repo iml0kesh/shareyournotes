@@ -13,7 +13,8 @@ const userRegister = async (req, res) => {
       res.status(400).json({ msg: "Bro give all data" });
     }
 
-    const user = User.findOne({ userEmail });
+    const user = await User.findOne({ userEmail });
+    console.log(user);
     if (user) {
       return res.status(400).json({ msg: "Email Already Registered" });
     }

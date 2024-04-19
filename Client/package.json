@@ -45,10 +45,13 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:3001",
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "Server.js",
   "author": "Lokesh Matta",
   "license": "ISC",
-  "keywords": []
+  "keywords": [],
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
+  }
 }
