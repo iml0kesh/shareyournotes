@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/shareyournotes/static/css/main.3b4355fb.css",
+    "main.js": "/shareyournotes/static/js/main.5d7d52f9.js",
+    "index.html": "/shareyournotes/index.html",
+    "main.3b4355fb.css.map": "/shareyournotes/static/css/main.3b4355fb.css.map",
+    "main.5d7d52f9.js.map": "/shareyournotes/static/js/main.5d7d52f9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3b4355fb.css",
+    "static/js/main.5d7d52f9.js"
+  ]
+}
