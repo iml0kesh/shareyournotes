@@ -10,7 +10,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/shareyournotes" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/create" element={<CreateNote />} />
         <Route path="/edit/:id" element={<UpdateNote />} />
