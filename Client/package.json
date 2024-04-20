@@ -1,6 +1,10 @@
 {
   "name": "shareyournotes",
   "version": "0.1.0",
+<<<<<<< HEAD
+=======
+  "homepage": "https://iml0kesh.github.io/shareyournotes",
+>>>>>>> 2348e78daf1bf1b557ec2a4bfd69933597275b27
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
