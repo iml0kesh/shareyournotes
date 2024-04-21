@@ -41,29 +41,34 @@ export const CreateNote = () => {
     <form onSubmit={createNote}>
       <div className="overlay">
         <div className="overlay-content">
-          <div className="note-header">
-            <input
+          <div className="left">
+            <div className="note-header">
+              <input
+                type="text"
+                value={note.title}
+                id="title"
+                name="title"
+                required
+                className="input-title"
+                onChange={handleChange}
+              />
+            </div>
+            <textarea
               type="text"
-              value={note.title}
-              id="title"
-              name="title"
+              value={note.content}
+              id="content"
+              name="content"
               required
-              className="input-title"
+              className="input-content"
               onChange={handleChange}
             />
           </div>
-          <textarea
-            type="text"
-            value={note.content}
-            id="content"
-            name="content"
-            required
-            className="input-content"
-            onChange={handleChange}
-          />
-          <button type="submit" className="note-save">
-            Save
-          </button>
+          <div className="right">
+            <button>Close</button>
+            <button type="submit" className="note-save">
+              Create
+            </button>
+          </div>
         </div>
       </div>
     </form>

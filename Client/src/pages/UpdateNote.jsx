@@ -17,7 +17,8 @@ export const UpdateNote = () => {
       const token = localStorage.getItem("activeToken");
       if (id) {
         try {
-          const res = await axios.get(`note/${id}`, {
+          console.log(id);
+          const res = await axios.get(`http://localhost:3001/note/${id}`, {
             headers: { activeToken: token },
           });
           setNote({
@@ -26,13 +27,13 @@ export const UpdateNote = () => {
             id: res.data._id,
           });
         } catch (err) {
-          console.log(err);
-          navigate("/");
+          console.log(err.message);
+          // navigate("/");
         }
       }
     };
     getNote();
-  }, [id, navigate]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,7 +50,7 @@ export const UpdateNote = () => {
           title,
           content,
         };
-        await axios.put(`note/edit/${id}`, newNote, {
+        await axios.put(`http://localhost:3001/note/edit/${id}`, newNote, {
           headers: { activeToken: token },
         });
       }
@@ -66,29 +67,34 @@ export const UpdateNote = () => {
     <form onSubmit={editNote}>
       <div className="overlay">
         <div className="overlay-content">
-          <div className="note-header">
-            <input
+          <div className="left">
+            <div className="note-header">
+              <input
+                type="text"
+                value={note.title}
+                id="title"
+                name="title"
+                required
+                className="input-title"
+                onChange={handleChange}
+              />
+            </div>
+            <textarea
               type="text"
-              value={note.title}
-              id="title"
-              name="title"
+              value={note.content}
+              id="content"
+              name="content"
               required
-              className="input-title"
+              className="input-content"
               onChange={handleChange}
             />
           </div>
-          <textarea
-            type="text"
-            value={note.content}
-            id="content"
-            name="content"
-            required
-            className="input-content"
-            onChange={handleChange}
-          />
-          <button type="submit" className="note-save">
-            Save
-          </button>
+          <div className="right">
+            <button>Close</button>
+            <button type="submit" className="note-save">
+              Update
+            </button>
+          </div>
         </div>
       </div>
     </form>

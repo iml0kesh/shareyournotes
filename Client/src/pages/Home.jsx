@@ -90,15 +90,10 @@ const Home = ({ isLogin, setIsLogin }) => {
       <div className="landpage">
         <div className="section1">
           <h1 className="head1">Sharing Is Caring</h1>
-          <br />
-          <br />
+          <button onClick={handleCreate}>Create</button>
         </div>
         <div className="notes-container">
           {/* To Get all Notes in the Database */}
-
-          <div className="notes-nav">
-            <p onClick={handleCreate}>Create</p>
-          </div>
 
           <div className="notes">
             {!userN
@@ -140,25 +135,27 @@ const Home = ({ isLogin, setIsLogin }) => {
       {selectedCard && (
         <div className="overlay">
           <div className="overlay-content">
-            <div className="note-header">
-              <h1>{selectedCard.title}</h1>
-              <h4 className="close" onClick={closeOverlay}>
-                {" "}
-                X
-              </h4>
-            </div>
-
-            {/* To Check if the Selected card was the user's */}
-
-            <p>{selectedCard.content}</p>
-            {userId === selectedCard.userId && (
-              <div className="card-footer-edit">
-                <Link to={`edit/${selectedCard._id}`} className="f-ecomp">
-                  Edit
-                </Link>
-                <div className="f-ecomp">2 days ago</div>
+            <div className="left">
+              <div className="note-header">
+                <h1>{selectedCard.title}</h1>
               </div>
-            )}
+
+              {/* To Check if the Selected card was the user's */}
+
+              <p>{selectedCard.content}</p>
+            </div>
+            <div className="right">
+              <button onClick={closeOverlay}>Close</button>
+              <button>Save</button>
+              {userId === selectedCard.userId && (
+                <button>
+                  {" "}
+                  <Link to={`/edit/${selectedCard._id}`} className="f-ecomp">
+                    Edit
+                  </Link>
+                </button>
+              )}
+            </div>
           </div>
         </div>
       )}

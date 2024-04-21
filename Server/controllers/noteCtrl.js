@@ -51,6 +51,7 @@ const deleteNote = async (req, res) => {
 };
 
 const updateNote = async (req, res) => {
+  // console.log("here");
   try {
     const { title, content } = req.body;
     await Note.findByIdAndUpdate(
@@ -68,6 +69,7 @@ const updateNote = async (req, res) => {
 
 const getNote = async (req, res) => {
   try {
+    console.log(req);
     const note = await Note.findById(req.params.id);
     res.json(note);
   } catch (err) {
