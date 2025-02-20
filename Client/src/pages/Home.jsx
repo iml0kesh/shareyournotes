@@ -90,7 +90,17 @@ const Home = ({ isLogin, setIsLogin }) => {
       <div className="landpage">
         <div className="section1">
           <h1 className="head1">Sharing Is Caring</h1>
-          <button onClick={handleCreate}>Create</button>
+          <h3 className="sub-head">READ - WRITE - SHARE</h3>
+          {/* <p>
+            Welcome! Whether you're here to immerse yourself in captivating
+            stories, share real-life experiences, or connect with friends
+            through shared notes, our website has you covered. Explore a world
+            where stories come to life, connections are made, and experiences
+            are shared. Join us on this journey of exploration and discovery.{" "}
+          </p> */}
+          <button className="btn-create" onClick={handleCreate}>
+            Create
+          </button>
         </div>
         <div className="notes-container">
           {/* To Get all Notes in the Database */}
@@ -106,7 +116,7 @@ const Home = ({ isLogin, setIsLogin }) => {
                     <h1 title={note.title}>{note.title}</h1>
                     <p>{note.content}</p>
                     <div className="card-footer">
-                      <div className="f-comp">{note.userId}</div>
+                      <div className="f-comp">by {note.userId}</div>
                       <div className="f-comp"></div>
                     </div>
                   </div>
@@ -145,8 +155,10 @@ const Home = ({ isLogin, setIsLogin }) => {
               <p>{selectedCard.content}</p>
             </div>
             <div className="right">
-              <button onClick={closeOverlay}>Close</button>
-              <button>Save</button>
+              <button className="btn-create" onClick={closeOverlay}>
+                Close
+              </button>
+              <button className="btn-create">Save</button>
               {userId === selectedCard.userId && (
                 <button>
                   {" "}
