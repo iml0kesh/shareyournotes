@@ -1,19 +1,21 @@
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
 const auth = (req, res, next) => {
   try {
     const auth_token = req.header("activeToken");
-    if (!auth_token) return res.status(401).json("BRO GO AWAY! No Token");
+    if (!auth_token)
+      return res.status(401).json({ msg: "No authentication token, authorization denied." });
 
     const data = jwt.verify(auth_token, process.env.JWT_SECRET);
-    req.body.userId = data.userId;
+    if (!data.userId)
+      return res.status(401).json({ msg: "Token is not valid." });
+
     req.user = data;
     next();
   } catch (error) {
-    res
-      .status(500)
-      .json({ msg: "Bro something went wrong", error: error.stack });
+    // If token is expired or invalid, jwt.verify throws an error
+    res.status(401).json({ msg: "Token is not valid.", error: error.message });
   }
 };
 
-module.exports = auth;
+export default auth;

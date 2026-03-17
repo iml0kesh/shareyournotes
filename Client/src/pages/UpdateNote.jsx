@@ -18,7 +18,7 @@ export const UpdateNote = () => {
       if (id) {
         try {
           console.log(id);
-          const res = await axios.get(`http://localhost:3001/note/${id}`, {
+          const res = await axios.get(`/note/${id}`, {
             headers: { activeToken: token },
           });
           setNote({
@@ -50,7 +50,7 @@ export const UpdateNote = () => {
           title,
           content,
         };
-        await axios.put(`http://localhost:3001/note/edit/${id}`, newNote, {
+        await axios.put(`/note/edit/${id}`, newNote, {
           headers: { activeToken: token },
         });
       }

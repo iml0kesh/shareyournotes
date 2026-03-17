@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const noteSchema = new mongoose.Schema(
+const noteSchema = new Schema(
   {
     title: {
       type: String,
@@ -19,4 +19,4 @@ const noteSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Note", noteSchema);
+export default model("Note", noteSchema);

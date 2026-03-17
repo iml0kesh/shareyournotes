@@ -1,7 +1,8 @@
-const express = require("express");
-const router = express.Router();
-const auth = require("../middleware/auth");
-const myNotes = require("../middleware/myNotes");
+import { Router } from "express";
+import auth from "../middleware/auth.js";
+import myNotes from "../middleware/myNotes.js";
+
+import noteCtrl from "../controllers/noteCtrl.js";
 
 const {
   getAllNotes,
@@ -10,26 +11,26 @@ const {
   updateNote,
   deleteNote,
   getNote,
-} = require("../controllers/noteCtrl");
+} = noteCtrl;
 
-const { userVerify } = require("../controllers/userCtrl");
+const router = Router();
 
 // Create a Notes.
-router.post("/createNote", auth, createNote);
+router.post("/createNote", myNotes, createNote);
 
 // Get All Notes.
-router.get("/notes", getAllNotes);
+router.get("/notes", auth, getAllNotes);
 
 // Get User Notes.
 router.get("/usr", myNotes, getUserNotes);
 
 // Get Note
-router.get("/:id", auth, getNote);
+router.get("/:id", myNotes, getNote);
 
 // Update A Notes.
-router.put("/edit/:id", auth, updateNote);
+router.put("/edit/:id", myNotes, updateNote);
 
 // Delete a Notes.
-router.delete("/delete/:id", auth, deleteNote);
+router.delete("/delete/:id", myNotes, deleteNote);
 
-module.exports = router;
+export default router;

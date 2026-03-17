@@ -11,8 +11,20 @@ const Home = ({ isLogin, setIsLogin }) => {
 
   useEffect(() => {
     const getNotes = async () => {
-      const res = await axios.get("note/notes");
-      setNotes(res.data);
+      try {
+        const token = localStorage.getItem("activeToken");
+
+        const response = await axios.get("/note/notes", {
+          headers: {
+            activeToken: token,
+          },
+        });
+
+        console.log("Notes fetched successfully:", response.data);
+        setNotes(response.data);
+      } catch (error) {
+        console.error("Error fetching notes:", error);
+      }
     };
     getNotes();
   }, []);
@@ -24,7 +36,7 @@ const Home = ({ isLogin, setIsLogin }) => {
   const [token, setToken] = useState("");
 
   const getUserNotes = async (token) => {
-    const res = await axios.get("note/usr", {
+    const res = await axios.get("/note/usr", {
       headers: { activeToken: token },
     });
     setUserNotes(res.data);
@@ -38,13 +50,7 @@ const Home = ({ isLogin, setIsLogin }) => {
       getUserNotes(token);
       setUserId(user);
     } else {
-      setUserNotes([
-        {
-          _id: "9999",
-          title: "opps",
-          content: "You need to login to see your notes.",
-        },
-      ]);
+      setUserNotes([]);
     }
   }, []);
 
@@ -106,36 +112,45 @@ const Home = ({ isLogin, setIsLogin }) => {
           {/* To Get all Notes in the Database */}
 
           <div className="notes">
-            {!userN
-              ? notes.map((note) => (
-                  <div
-                    className="note-card"
-                    key={note._id}
-                    onClick={() => handleCardClick(note)}
-                  >
-                    <h1 title={note.title}>{note.title}</h1>
-                    <p>{note.content}</p>
-                    <div className="card-footer">
-                      <div className="f-comp">by {note.userId}</div>
-                      <div className="f-comp"></div>
-                    </div>
+            {!userN ? (
+              notes.map((note) => (
+                <div
+                  className="note-card"
+                  key={note._id}
+                  onClick={() => handleCardClick(note)}
+                >
+                  <h1 title={note.title}>{note.title}</h1>
+                  <p>{note.content}</p>
+                  <div className="card-footer">
+                    <div className="f-comp">by {note.userId}</div>
+                    <div className="f-comp"></div>
                   </div>
-                ))
-              : // To Get the User's Note's
-
-                userNotes.map((note) => (
-                  <div className="note-card" key={note._id}>
-                    <h1 title={note.title}>{note.title}</h1>
-                    <p onClick={() => handleCardClick(note)}>{note.content}</p>
-                    <div className="card-footer">
-                      <Link to={`edit/${note._id}`}>Edit</Link>
-                      <button onClick={() => deleteNote(note._id)}>
-                        Delete
-                      </button>
-                      <div className="f-comp">2 days ago</div>
-                    </div>
+                </div>
+              ))
+            ) : // To Get the User's Note's
+            userNotes.length === 0 && !token ? (
+              <p
+                style={{
+                  textAlign: "center",
+                  width: "100%",
+                  marginTop: "2rem",
+                }}
+              >
+                You need to login to see your notes.
+              </p>
+            ) : (
+              userNotes.map((note) => (
+                <div className="note-card" key={note._id}>
+                  <h1 title={note.title}>{note.title}</h1>
+                  <p onClick={() => handleCardClick(note)}>{note.content}</p>
+                  <div className="card-footer">
+                    <Link to={`edit/${note._id}`}>Edit</Link>
+                    <button onClick={() => deleteNote(note._id)}>Delete</button>
+                    <div className="f-comp">2 days ago</div>
                   </div>
-                ))}
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>

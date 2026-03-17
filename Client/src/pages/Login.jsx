@@ -37,7 +37,7 @@ const Login = () => {
   const registerSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("users/register/", {
+      const res = await axios.post("/users/register", {
         userName: user.userName,
         userId: user.userId,
         userEmail: user.userEmail,
@@ -53,13 +53,15 @@ const Login = () => {
 
       setIsLoginActive(true);
     } catch (err) {
-      err.response.data.msg && setErr(err.response.data.msg);
+      setErr(
+        err.response?.data?.msg || "Registration failed. Please try again.",
+      );
     }
   };
   const loginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("users/login", {
+      const res = await axios.post("/users/login", {
         userEmail: user.userEmail,
         userPassword: user.userPassword,
       });
@@ -74,7 +76,10 @@ const Login = () => {
       localStorage.setItem("userId", userId);
       navigate("/");
     } catch (error) {
-      console.log(error);
+      setErr(
+        error.response?.data?.msg ||
+          "Login failed. Please check your credentials.",
+      );
     }
   };
 

@@ -1,20 +1,15 @@
-require("dotenv").config();
+import "dotenv/config";
 
-const express = require("express");
+import express, { json, urlencoded } from "express";
 const app = express();
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const db = require("./config/dbconn");
-const userRoutes = require("./routes/User");
-const noteRoutes = require("./routes/Note");
+import cors from "cors";
+import "./config/dbconn.js";
+import userRoutes from "./routes/User.js";
+import noteRoutes from "./routes/Note.js";
 
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(json());
+app.use(urlencoded({ extended: true }));
 app.use(cors());
-
-// Database Connection status
-db;
 
 app.use("/users", userRoutes);
 

@@ -1,13 +1,7 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 mongoose
-  .connect(
-    "mongodb+srv://lokesh:lokesh@shareyournotes.lxsfd08.mongodb.net/notes?retryWrites=true&w=majority&appName=Shareyournotes",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("Database connection success! (MongoDB)");
   })
@@ -16,4 +10,4 @@ mongoose
   });
 
 // Export the Mongoose instance to use it in other parts of your application
-module.exports = mongoose.connection;
+export default mongoose.connection;

@@ -1,22 +1,21 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const User = require("../models/userModel");
-const Auth = require("../middleware/auth");
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import User from "../models/userModel.js";
 
 // ------------------------------------------------------------------------
 // Function for User Registration.
 
-const userRegister = async (req, res) => {
+export const userRegister = async (req, res) => {
   try {
     const { userName, userId, userEmail, userPassword } = req.body;
     if (!userName || !userId || !userEmail || !userPassword) {
-      res.status(400).json({ msg: "Bro give all data" });
+      return res.status(400).json({ msg: "Please enter all fields." });
     }
 
     const user = await User.findOne({ userEmail });
-    console.log(user);
+
     if (user) {
-      return res.status(400).json({ msg: "Email Already Registered" });
+      return res.status(400).json({ msg: "An account with this email already exists." });
     }
 
     // SALT OF THE PASSWORD
@@ -35,40 +34,39 @@ const userRegister = async (req, res) => {
     res.status(201).json({ msg: "Register Success" });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({ msg: "bro something went wrong", err: err });
+    return res.status(500).json({ msg: "Server error during registration.", error: err.message });
   }
 };
 
 // -------------------------------------------------------------------------
 // Function to Check User Login
 
-const userLogin = async (req, res) => {
+export const userLogin = async (req, res) => {
   try {
     const { userEmail, userPassword } = req.body;
     if (!userEmail || !userPassword) {
-      res.status(500).json("Give all fields bro");
+      return res.status(400).json({ msg: "Please enter all fields." });
     }
 
     // Searching for userEmail from DB. (if not exist create new account.)
     const user = await User.findOne({ userEmail: userEmail });
     if (!user) {
-      res.status(400).json("Not registered!");
+      return res.status(400).json({ msg: "User with this email does not exist." });
     }
 
     // Checking for Right Password.
     const comparePass = await bcrypt.compare(userPassword, user.userPassword);
     if (!comparePass) {
-      res.status(400).json("Bro wrong pass");
+      return res.status(400).json({ msg: "Invalid credentials." });
     }
 
     // Space for Token Generation
     const activeToken = jwt.sign(
-      { userId: user.userId },
+      { userId: user.userId, id: user._id },
       process.env.JWT_SECRET
     );
 
     const userId = user.userId;
-    delete user.userPassword;
 
     res.status(200).json({ activeToken, userId });
   } catch (err) {
@@ -76,26 +74,20 @@ const userLogin = async (req, res) => {
   }
 };
 
-const userVerify = (req, res) => {
+export const userVerify = async (req, res) => {
   try {
     const token = req.header("activeToken");
     if (!token) return res.send(false);
 
-    jwt.verify(token, process.env.JWT_SECRET, async (err, verified) => {
-      if (err) return res.send(false);
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    if (!verified) return res.send(false);
 
-      const user = await User.findById(verified._id);
-      if (!user) return res.send(false);
+    // Use the id from the token to find the user
+    const user = await User.findById(verified.id);
+    if (!user) return res.send(false);
 
-      return res.send(true);
-    });
+    return res.send(true);
   } catch (error) {
-    console.log(error);
+    return res.send(false);
   }
-};
-
-module.exports = {
-  userRegister,
-  userLogin,
-  userVerify,
 };

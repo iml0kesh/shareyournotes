@@ -1,5 +1,5 @@
-const Note = require("../models/noteModel");
-const User = require("../models/userModel");
+import Note from "../models/noteModel.js";
+import User from "../models/userModel.js";
 
 // Get All Notes
 const getAllNotes = async (req, res) => {
@@ -8,17 +8,19 @@ const getAllNotes = async (req, res) => {
     res.json(data);
   } catch (error) {
     console.log(error);
+    res.status(500).json({ msg: "Server error while getting all notes." });
   }
 };
 
 // Create a Note
 const createNote = async (req, res) => {
   try {
-    const { title, content, userId } = req.body;
+    const { title, content } = req.body;
+    // Get userId from the authenticated user (set by auth middleware)
     const newNote = new Note({
       title,
       content,
-      userId,
+      userId: req.user.userId, // This comes from myNotes middleware
     });
 
     await newNote.save();
@@ -32,7 +34,6 @@ const createNote = async (req, res) => {
 const getUserNotes = async (req, res) => {
   try {
     const notes = await Note.find({ userId: req.user.userId });
-    notes.user;
     res.json(notes);
   } catch (err) {
     console.error(err);
@@ -42,8 +43,12 @@ const getUserNotes = async (req, res) => {
 
 const deleteNote = async (req, res) => {
   try {
-    console.log("Here");
-    await Note.findByIdAndDelete(req.params.id);
+    // Ensure the note belongs to the user trying to delete it
+    const note = await Note.findOneAndDelete({
+      _id: req.params.id,
+      userId: req.user.userId,
+    });
+    if (!note) return res.status(404).json({ msg: "Note not found or user not authorized." });
     res.json({ msg: "Note Deleted" });
   } catch (err) {
     return res.status(500).json({ msg: err.message });
@@ -51,16 +56,16 @@ const deleteNote = async (req, res) => {
 };
 
 const updateNote = async (req, res) => {
-  // console.log("here");
   try {
     const { title, content } = req.body;
-    await Note.findByIdAndUpdate(
-      { _id: req.params.id },
-      {
-        title,
-        content,
-      }
+    // Ensure the note belongs to the user trying to update it
+    const note = await Note.findOneAndUpdate(
+      { _id: req.params.id, userId: req.user.userId },
+      { title, content },
+      { new: true } // Optional: returns the updated document
     );
+    if (!note) return res.status(404).json({ msg: "Note not found or user not authorized." });
+
     res.json({ msg: "Updated a Note" });
   } catch (err) {
     return res.status(500).json({ msg: err.message });
@@ -69,15 +74,20 @@ const updateNote = async (req, res) => {
 
 const getNote = async (req, res) => {
   try {
-    console.log(req);
-    const note = await Note.findById(req.params.id);
+    // Ensure the note belongs to the user requesting it
+    const note = await Note.findOne({
+      _id: req.params.id,
+      userId: req.user.userId,
+    });
+    if (!note) return res.status(404).json({ msg: "Note not found or user not authorized." });
     res.json(note);
   } catch (err) {
     console.log(err);
+    return res.status(500).json({ msg: err.message });
   }
 };
 
-module.exports = {
+export default {
   getAllNotes,
   createNote,
   getUserNotes,
