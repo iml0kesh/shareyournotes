@@ -16,8 +16,6 @@ app.use("/users", userRoutes);
 // NOTE ROUTES
 app.use("/note", noteRoutes);
 
-// Render all Notes.
-
 app.listen(3001, () => {
   console.log(`Server is up and running on port 3001`);
 });
