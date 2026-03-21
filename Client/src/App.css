@@ -167,10 +167,6 @@ body {
   .btn-create {
     font-size: 16px;
   }
-
-  .note-card {
-    width: 100%;
-  }
 }
 
 /* Home Note Css */
@@ -202,45 +198,50 @@ body {
 }
 
 .notes {
-  display: flex;
-  gap: 20px;
-
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  align-items: start;
 }
 
 .note-card {
-  margin: 1%;
-  box-shadow: 0px 0px 5px 1px rgba(93, 91, 91, 0.6);
-  border-radius: 10px;
-  overflow: hidden;
-  width: calc(100% - 80%);
-  height: 100%;
-  position: relative;
+  background-color: #202124;
+  border: 1px solid #5f6368;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
   cursor: pointer;
-  transition: 0.3s;
+  transition:
+    box-shadow 0.2s ease-in-out,
+    border 0.2s ease-in-out;
+  box-sizing: border-box;
 }
 
 .note-card:hover {
-  box-shadow: 0px 0px 5px 5px #dedcac62;
+  box-shadow:
+    0 1px 2px 0 rgba(0, 0, 0, 0.3),
+    0 1px 3px 1px rgba(0, 0, 0, 0.15);
+  border-color: #f5ddb0ac;
 }
 
 .note-card h1 {
-  background-color: #f5ddb0ac;
-  font-size: 20px;
-  padding: 10px;
-  font-family: "Lora", serif;
+  font-size: 1.2rem;
+  color: #e8eaed;
+  padding: 16px 16px 8px 16px;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 .note-card p {
-  background-color: rgb(26, 25, 26);
-  color: rgb(212, 203, 203);
-  font-size: 16px;
-  padding: 10px;
-  overflow: hidden;
-  font-family: "Lora", sans-serif;
-  text-align: justify;
-  line-height: 22px;
+  color: #9aa0a6;
+  font-size: 0.9rem;
+  padding: 0 16px 16px 16px;
+  font-family: "Poppins", sans-serif;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .note-card h4 {
@@ -248,9 +249,7 @@ body {
 }
 
 .card-footer {
-  background-color: rgb(46, 45, 44);
-  /* border: 1px solid red; */
-  padding: 10px;
+  padding: 0 16px 16px 16px;
   display: flex;
   justify-content: space-between;
 }
@@ -287,9 +286,8 @@ body {
 }
 
 @media screen and (max-width: 480px) {
-  .note-card {
-    width: 100%;
-    margin: 0% 5%;
+  .notes {
+    grid-template-columns: 1fr;
   }
 }
 
